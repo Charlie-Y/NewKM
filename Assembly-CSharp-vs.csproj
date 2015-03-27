@@ -46,7 +46,22 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\_Scripts\GameManager.cs" />
+     <Compile Include="Assets\_Scripts\Cell.cs" />
+     <Compile Include="Assets\_Scripts\Debugger.cs" />
+     <Compile Include="Assets\_Scripts\GridData.cs" />
+     <Compile Include="Assets\_Scripts\Singleton.cs" />
+     <Compile Include="Assets\_Scripts\Util.cs" />
+     <Compile Include="Assets\_Scripts\_Managers\CameraController.cs" />
+     <Compile Include="Assets\_Scripts\_Managers\FightManager.cs" />
+     <Compile Include="Assets\_Scripts\_Managers\GameManager.cs" />
+     <Compile Include="Assets\_Scripts\_Managers\GridManager.cs" />
+     <Compile Include="Assets\_Scripts\_Managers\InputMapper.cs" />
+     <Compile Include="Assets\_Scripts\_Managers\UIManager.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\AllyUnit.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\BasicEnemyEntity.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\BasicEnemyUnit.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\CellEntity.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\Unit.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
