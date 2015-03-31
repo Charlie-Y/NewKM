@@ -10,22 +10,12 @@ using System.Collections;
 public class BasicEnemyUnit : Unit {
 
 	// Set in inspector
-	public GameObject basicCellEntityPrefab; 
+	override public string unitName { get {return "EnemyUnit";} set {} }
 
 	//gar c#!!!
-	public override bool isEnemy {
-		get { return true; }
-		set { }
-	}
+	override public bool isEnemy { get { return true; } set { } }
 
 
-	protected override void InitSpawnEntities ()
-	{
-		GameObject instance = Instantiate(basicCellEntityPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-		instance.transform.SetParent(transform);
-
-//		throw new System.NotImplementedException ();
-	}
 
 
 }

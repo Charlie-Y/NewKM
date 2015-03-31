@@ -22,7 +22,21 @@ public class GameManager : MonoBehaviour {
 	private FightManager fightScript;
 
 	private int level = 3;                                  //Current level number, expressed in game as "Day 1".
+
+	[SerializeField] 
+	private GameState _gameState = GameState.paused;
+	private GameState _prevState = GameState.paused;
 	
+	public GameState gameState {
+		get { return _gameState;}
+		set {
+			_prevState = _gameState;
+			_gameState = value;
+			LeaveState(_prevState);
+			EnterState(_gameState);
+		}
+	}
+
 	//Awake is always called before any Start functions
 	void Awake()
 	{
@@ -46,10 +60,7 @@ public class GameManager : MonoBehaviour {
 	void InitGame()
 	{
 		//Call the SetupScene function of the BoardManager script, pass it current level number.
-		gridScript.InitGrid(level);
-
-
-
+//		gridScript.InitGrid(level);
 		fightScript.Init();
 	}
 	
@@ -58,6 +69,17 @@ public class GameManager : MonoBehaviour {
 	{
 		
 	}
+
+
+	void EnterState(GameState state){
+		Debugger.Log ("GameState", "Entering state: " + state.ToString());
+	}
+
+	void LeaveState(GameState state){
+		Debugger.Log ("GameState", "Leaving state: " + state.ToString());
+	}
+
+
 	
 }
 

@@ -47,21 +47,38 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_Scripts\Cell.cs" />
-     <Compile Include="Assets\_Scripts\Debugger.cs" />
+     <Compile Include="Assets\_Scripts\Grid.cs" />
      <Compile Include="Assets\_Scripts\GridData.cs" />
-     <Compile Include="Assets\_Scripts\Singleton.cs" />
-     <Compile Include="Assets\_Scripts\Util.cs" />
+     <Compile Include="Assets\_Scripts\TestColliders.cs" />
      <Compile Include="Assets\_Scripts\_Managers\CameraController.cs" />
      <Compile Include="Assets\_Scripts\_Managers\FightManager.cs" />
      <Compile Include="Assets\_Scripts\_Managers\GameManager.cs" />
      <Compile Include="Assets\_Scripts\_Managers\GridManager.cs" />
      <Compile Include="Assets\_Scripts\_Managers\InputMapper.cs" />
      <Compile Include="Assets\_Scripts\_Managers\UIManager.cs" />
-     <Compile Include="Assets\_Scripts\_UnitsEntities\AllyUnit.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\BasicAllyEntity.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\BasicAllyUnit.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\BasicBeaconEntity.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\BasicBeaconUnit.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\BasicEnemyEntity.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\BasicEnemyUnit.cs" />
-     <Compile Include="Assets\_Scripts\_UnitsEntities\CellEntity.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\Entity.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\PlayerEntity.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\PlayerUnit.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\Unit.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\UnitHealth.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\_Brains\AIBrain.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\_Brains\BeaconBrain.cs" />
+     <Compile Include="Assets\_Scripts\_UnitsEntities\_Brains\SoldierBrain.cs" />
+     <Compile Include="Assets\_Scripts\_Utilities\Debugger.cs" />
+     <Compile Include="Assets\_Scripts\_Utilities\KillOnAwake.cs" />
+     <Compile Include="Assets\_Scripts\_Utilities\Singleton.cs" />
+     <Compile Include="Assets\_Scripts\_Utilities\Util.cs" />
+     <Compile Include="Assets\_Scripts\_Utilities\WASDControl.cs" />
+     <Compile Include="Assets\_Scripts\_Weapons\BasicGun.cs" />
+     <Compile Include="Assets\_Scripts\_Weapons\Damage.cs" />
+     <Compile Include="Assets\_Scripts\_Weapons\Weapon.cs" />
+     <Compile Include="Assets\_Scripts\_Weapons\WeaponEntity.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

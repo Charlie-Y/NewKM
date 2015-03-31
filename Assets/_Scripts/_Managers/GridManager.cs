@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 
 /// <summary>
-/// Responsible for storing and managing references to the cells
+/// Responsible for storing and managing references to the cells that will be brought up
+/// these cells are relative to the player's position 
 /// 
-/// also setsup the grid
+/// and are hidden normally
+/// 
 /// </summary>
 public class GridManager : MonoBehaviour {
 
