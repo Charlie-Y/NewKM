@@ -10,18 +10,21 @@ public enum AIStrategy { none, advancing, waiting, attacking, spawning}
 /// </summary>
 public abstract class AIBrain : MonoBehaviour {
 
+	// for debugging
+	public string debugStatus; 
 
 	protected Unit unit;
 	
 	// how often to think...
 	protected CooldownField thinkCooldown;
 
-	protected virtual float thinkTime { get{return 1f;} set{} }
+	protected virtual float thinkTime { get{return .5f;} set{} }
 
 
 	// Things i think all of AI brains will want
 	public AIStrategy currentStrat = AIStrategy.none;
 	public Unit targetUnit;
+	private float someSpeed = 3f;
 
 	// Inspector!
 	public bool brainOn = true;
@@ -62,6 +65,12 @@ public abstract class AIBrain : MonoBehaviour {
 	}
 
 	// These should probably be the abstract ovverrides
+	/*
+	switch(currentStrat){
+		case AIStrategy.none: 
+		case AIStrategy.waiting :
+		}
+	 */
 	protected abstract void DetermineStrategy();
 
 	protected abstract void ExecuteStrategy();
@@ -95,12 +104,10 @@ public abstract class AIBrain : MonoBehaviour {
 	}
 
 	protected void MoveEntityTowardsEntity(Entity e1, Entity e2){
-		float someSpeed = 2;
 		e1.transform.position = Vector2.MoveTowards(e1.transform.position, e2.transform.position, someSpeed * Time.deltaTime);
 	}
 
 	protected void MoveEntityAwayFromEntity(Entity e1, Entity e2){
-		float someSpeed = -2.4f;
 //		Vector2 pos = -(e2.transform.position - e1.transform.position);
 
 		e1.transform.position = Vector2.MoveTowards(e1.transform.position, e2.transform.position, someSpeed * Time.deltaTime);

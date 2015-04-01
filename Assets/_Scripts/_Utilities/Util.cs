@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public static class Util {
 
 
-
 	public static GameObject InitWithParent(GameObject prefab, GameObject parent ){
 		GameObject instance = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
 		if (parent != null)

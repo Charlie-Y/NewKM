@@ -31,7 +31,10 @@ public abstract class Entity : MonoBehaviour {
 //		} else {
 //			Debug.Log ("fine");
 //		}
-		ScaleSpriteToSize();
+
+
+//		ScaleSpriteToSize();
+
 	}
 
 	/// <summary>

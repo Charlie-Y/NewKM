@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 
@@ -24,16 +25,6 @@ public class UnitHealth : MonoBehaviour {
 		unit.health = this;
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	// Maybe have some kind of armor system...
 	// later
 	public void TakeDamage(Weapon w){
@@ -41,12 +32,23 @@ public class UnitHealth : MonoBehaviour {
 			return;
 
 		// Take into consideration unit armor
-		currentHealth -= w.damage;
 
+		// send a message to itself! yay!
+		gameObject.SendMessage("OnDamageFromWeapon", w);
+//		OnDamageFromWeapon(w);
 		if (currentHealth <= 0){
-			unit.NoHealth(w);
+//			OnDeath(w);
+			gameObject.SendMessage("OnDeath", w);
 		}
 
+	}
+
+	void OnDamageFromWeapon(Weapon w){
+		currentHealth -= w.damage;
+	}
+
+	void OnDeath(Weapon w){
+		unit.NoHealth(w);
 
 	}
 }

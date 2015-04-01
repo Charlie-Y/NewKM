@@ -50,6 +50,7 @@
      <Compile Include="Assets\_Scripts\Grid.cs" />
      <Compile Include="Assets\_Scripts\GridData.cs" />
      <Compile Include="Assets\_Scripts\TestColliders.cs" />
+     <Compile Include="Assets\_Scripts\UnitHUD.cs" />
      <Compile Include="Assets\_Scripts\_Managers\CameraController.cs" />
      <Compile Include="Assets\_Scripts\_Managers\FightManager.cs" />
      <Compile Include="Assets\_Scripts\_Managers\GameManager.cs" />

@@ -23,17 +23,23 @@ public class SoldierBrain : AIBrain {
 		switch(currentStrat){
 		case AIStrategy.none: case AIStrategy.waiting :
 			// find the nearest unit of the other group
-			if (targetUnit == default(Unit)){
+			if (targetUnit == null){
+
 				Unit nearestEnemy = FindNearestEnemy();
 				targetUnit = nearestEnemy;
+
 			} 
 			
 			if (targetUnit != null){
 				Entity e1 = unit.GetEntity();
 				Entity e2 = targetUnit.GetEntity();
 				
-				if (EntityDistApart( weapon.range * weapon.rangeMod, e1, e2))
+				if (EntityDistApart( weapon.range * weapon.rangeMod, e1, e2)){
 					currentStrat = AIStrategy.advancing;
+				} else {
+					currentStrat = AIStrategy.attacking;
+				}
+
 			}
 			
 			

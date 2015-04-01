@@ -11,6 +11,8 @@ public class BeaconBrain : AIBrain {
 	float spawnRadius = 1f;
 	int numToSpawn = 3;
 
+	public bool infiniteSpawn = false;
+
 
 	public override void Awake ()
 	{
@@ -24,7 +26,7 @@ public class BeaconBrain : AIBrain {
 	protected override void DetermineStrategy(){
 		switch(currentStrat){
 		case AIStrategy.none: case AIStrategy.waiting :
-			if (numToSpawn > 0)
+			if (numToSpawn > 0 || infiniteSpawn)
 				currentStrat = AIStrategy.spawning;
 			break;
 		}
@@ -35,7 +37,7 @@ public class BeaconBrain : AIBrain {
 		case AIStrategy.none: case AIStrategy.waiting :
 			break;
 		case AIStrategy.spawning:
-			if (numToSpawn <= 0 )
+			if (numToSpawn <= 0 && !infiniteSpawn)
 				currentStrat = AIStrategy.none;
 
 			if (spawnCD.Check()){

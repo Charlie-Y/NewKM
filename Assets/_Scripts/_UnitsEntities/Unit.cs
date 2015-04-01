@@ -42,19 +42,18 @@ public abstract class Unit : MonoBehaviour {
 
 	//public bool _isEnemy;
 	abstract public bool isEnemy {get; set;}
-	
-	protected int id = 0;
-	public int centCount = 0; //debug purposes 
-	public GameObject basicEntityPrefab; // Set in inspector
 
+	protected int id = 0;
 	[HideInInspector]
 	public AIBrain brain;
 	[HideInInspector]
 	public UnitHealth health;
 
+	public GameObject basicEntityPrefab; // Set in inspector
 	public UnitGenus genus = UnitGenus.normal; // set in inspector
 	public UnitSpecies species = UnitSpecies.normal; // set in inspect
 
+	[HideInInspector]
 	public bool hasWeapon = false;
 
 	List<Entity> entities = new List<Entity>();
@@ -62,7 +61,8 @@ public abstract class Unit : MonoBehaviour {
 
 	void Awake(){
 		InitEntities();
-		gameObject.name += ": " + id++.ToString();
+		id = Unit.ids++;
+		gameObject.name += ": " + id.ToString();
 	}
 
 	// Use this for initialization
@@ -122,7 +122,6 @@ public abstract class Unit : MonoBehaviour {
 	protected virtual void AddEntity(Entity cent){
 		entities.Add(cent);
 		cent.unit = this;
-		centCount++;
 	}
 
 	//

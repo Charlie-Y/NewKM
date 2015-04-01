@@ -30,7 +30,9 @@ public class FightManager : MonoBehaviour {
 	public GameObject basicEnemyUnitPrefab; 
 	public GameObject basicAllyUnitPrefab; 
 
+	// just for organization, put them under a gameobject
 	public GameObject unitParent;
+	public GameObject weaponEntityParent;
 
 
 	void Awake(){
@@ -75,7 +77,7 @@ public class FightManager : MonoBehaviour {
 //		SpawnUnitAtPos(basicEnemyUnitPrefab, 8, 1);
 //		SpawnUnitAtPos(basicEnemyUnitPrefab, 8, 2);
 
-//		SpawnUnitAtPos(basicAllyUnitPrefab, 1, 2);
+//		SpawnUnitAtPos(basicAllyUnitPrefab, 1, 2);.
 //		SpawnUnitAtPos(basicAllyUnitPrefab, 2, 2);
 	}
 

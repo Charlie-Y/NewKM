@@ -82,7 +82,10 @@ public abstract class Weapon : MonoBehaviour {
 	public virtual void FireAtEntity(Entity e, bool useCooldown ){
 		if (!useCooldown || fireCD.Check()){
 			GameObject instance = Instantiate(projectilePrefab, owner.GetEntity().transform.position, Quaternion.identity) as GameObject;
+			instance.transform.SetParent(FightManager.instance.weaponEntityParent.transform);
+
 			WeaponEntity went = instance.GetComponent<WeaponEntity>();
+
 			went.Setup(this, e, projectileSpeed);
 		}
 	}
