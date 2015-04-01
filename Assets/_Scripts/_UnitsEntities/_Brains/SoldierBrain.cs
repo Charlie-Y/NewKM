@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// Soldier brain.
+/// 
+/// 
+/// todo: account for units moving out of range while firing
+/// </summary>
 public class SoldierBrain : AIBrain {
 
 	public Weapon weapon;

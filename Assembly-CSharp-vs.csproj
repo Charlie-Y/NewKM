@@ -51,6 +51,8 @@
      <Compile Include="Assets\_Scripts\GridData.cs" />
      <Compile Include="Assets\_Scripts\TestColliders.cs" />
      <Compile Include="Assets\_Scripts\UnitHUD.cs" />
+     <Compile Include="Assets\_Scripts\_HUDScripts\HUDEnergyBar.cs" />
+     <Compile Include="Assets\_Scripts\_HUDScripts\HUDHealthBar.cs" />
      <Compile Include="Assets\_Scripts\_Managers\CameraController.cs" />
      <Compile Include="Assets\_Scripts\_Managers\FightManager.cs" />
      <Compile Include="Assets\_Scripts\_Managers\GameManager.cs" />
@@ -58,6 +60,7 @@
      <Compile Include="Assets\_Scripts\_Managers\InputMapper.cs" />
      <Compile Include="Assets\_Scripts\_Managers\UIManager.cs" />
      <Compile Include="Assets\_Scripts\_Player\Shield.cs" />
+     <Compile Include="Assets\_Scripts\_Player\ShieldEntity.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\BasicAllyEntity.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\BasicAllyUnit.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\BasicBeaconEntity.cs" />

@@ -27,7 +27,7 @@ public class UnitHealth : MonoBehaviour {
 
 	// Maybe have some kind of armor system...
 	// later
-	public void TakeDamage(Weapon w){
+	public void CalculateDamage(Weapon w){
 		if (invincible)
 			return;
 
@@ -42,6 +42,11 @@ public class UnitHealth : MonoBehaviour {
 		}
 
 	}
+
+	public float GetHealthPercentage(){
+		return (float)currentHealth/(float)maxHealth;
+	}
+
 
 	void OnDamageFromWeapon(Weapon w){
 		currentHealth -= w.damage;

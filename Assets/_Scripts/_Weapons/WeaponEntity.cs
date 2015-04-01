@@ -56,8 +56,6 @@ public class WeaponEntity : MonoBehaviour {
 		
 	}
 
-
-
 	bool isOutOfRange(){
 		Vector3 v = startPosition - transform.position;
 		return (v.magnitude > range);
@@ -79,16 +77,12 @@ public class WeaponEntity : MonoBehaviour {
 
 //	void OnCollisionEnter2D(Collision2D other){
 	void OnTriggerEnter2D(Collider2D other){
-
 //		Debugger.Log("Weapon", "Hit: " + other.gameObject.name);
 //		Debugger.Log("Weapon", "Hit: " + other.tag);
-
 		if (SameSideAsOther(other.gameObject))
 			return;
-
 		if (w.owner != null){
-			if (other.gameObject.GetComponent<Entity>() == w.owner.GetEntity()){
-//				Debugger.Log ("Weapon", "foo");
+			if (other.gameObject.GetComponent<Entity>() == w.owner.GetEntity()){ // Stop hitting yourself. stop hitting yourself
 				return;
 			}
 		}
@@ -99,10 +93,14 @@ public class WeaponEntity : MonoBehaviour {
 			Destroy(gameObject);
 
 		} else {
-			// should send to 
+			if ( other.tag == "Shield"){
+				other.transform.parent.SendMessage("ShieldHit", w, SendMessageOptions.DontRequireReceiver);
+			} else {
+				other.transform.parent.SendMessage("TakeDamage", w, SendMessageOptions.DontRequireReceiver);
+
+			}
+//			Debugger.Log("Shield", "Hit: " + other.gameObject.name);
 //			Debugger.Log("Weapon", "Hit: " + other.gameObject.transform.parent.name);
-//			Debugger.Log("Weapon", "Hit: " + other.gameObject.transform.parent.name);
-			other.gameObject.transform.parent.gameObject.SendMessage("TakeDamage", w, SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);
 		}
 

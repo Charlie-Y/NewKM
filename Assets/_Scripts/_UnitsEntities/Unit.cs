@@ -66,12 +66,12 @@ public abstract class Unit : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
 		AddToFightManager();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public virtual void Update () {
 	
 	}
 
@@ -146,5 +146,23 @@ public abstract class Unit : MonoBehaviour {
 		RemoveFromFightManager();
 		Destroy(gameObject);
 	}
+
+	/// <summary>
+	/// Takes the damage.
+	/// </summary>
+	/// <param name="w">The width.</param>
+	void TakeDamage(Weapon w){
+		CalculateHit(w);
+	}
+
+
+	/// <summary>
+	/// Lots of logic... hmm armor?
+	/// </summary>
+	/// <param name="w">The width.</param>
+	protected virtual void CalculateHit(Weapon w){
+		health.CalculateDamage(w);
+	}
+
 
 }
