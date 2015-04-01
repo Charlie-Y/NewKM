@@ -14,17 +14,24 @@ public class UnitHUD : MonoBehaviour {
 
 	// Set in inspector, for now..
 	public GameObject healthBarPrefab;
-	public GameObject textPrefab;
-
+	public GameObject unitNamePrefab;
 
 	public bool showName = true;
 	
-	float barOffset = -.05f;
+	float barOffset = 0f;
+	float textOffset = -6f;
 
+	GameObject canvas;
 	GameObject toFollow;
 	SpriteRenderer rend;
+
+	// Health bar
 	GameObject healthBar;
 	Image healthBarFillImg;
+
+	// Name
+	GameObject nameTextObj;
+	Text nameText;
 
 	bool hasHealth = false;
 
@@ -35,45 +42,75 @@ public class UnitHUD : MonoBehaviour {
 
 		hasHealth = health != null;
 
+		if (hasHealth || showName){
+			canvas = GameObject.FindWithTag("IngameCanvas");
+			toFollow = unit.GetEntity().gameObject;
+			rend = toFollow.GetComponent<SpriteRenderer>();
+		}
+
 		if (hasHealth)
 			CreateHealthUI();
+
+		if (showName)
+			CreateNameUI();
 		
 	}
-	
+
+
 	// Update is called once per frame
 	// The health bar will  need to track the thing in worldspace as well
 	void Update () {
 		if (hasHealth)
 			UpdateHealthUI();
+
+		if (showName)
+			UpdateNameUI();
 	}
 
 
+	void CreateNameUI(){
+		nameTextObj = Util.InitWithParent(unitNamePrefab, canvas);
+		nameText = nameTextObj.GetComponent<Text>();
+		nameText.text = unit.uniqName;
+
+		UpdateNameUI();
+	}
+
+	void UpdateNameUI(){
+		nameTextObj.transform.position = HUDPos(textOffset);
+	}
 
 	void CreateHealthUI(){
 		if (healthBarPrefab == null)
 			return;
 		
-		GameObject canvas = GameObject.FindWithTag("IngameCanvas");
+
 		healthBar = Util.InitWithParent(healthBarPrefab, canvas);
 		
 		// This is ridiculous
 		healthBarFillImg = healthBar.transform.GetChild(0).gameObject.GetComponent<Image>();
 		healthBarFillImg.fillAmount = HealthPercentage();
 		
-		toFollow = unit.GetEntity().gameObject;
-		rend = toFollow.GetComponent<SpriteRenderer>();
+		UpdateHealthUI();
 	}
-	
+
+
+	Vector3 HUDPos(float offset = 0){
+		float offsetY = rend.bounds.size.y + barOffset + offset;
+		Vector3 newPos =  toFollow.transform.position;
+		newPos.y += offsetY;
+
+		return newPos;
+	}
+
 	void UpdateHealthUI(){
 		if (healthBarPrefab == null)
 			return;
 		if (toFollow == null)
 			return;
 
-		float offsetY = rend.bounds.size.y + barOffset;
-		Vector3 newPos =  toFollow.transform.position;
-		newPos.y += offsetY;
-		healthBar.transform.position = newPos;
+
+		healthBar.transform.position = HUDPos(barOffset);
 	}
 	
 	float HealthPercentage(){
@@ -91,5 +128,6 @@ public class UnitHUD : MonoBehaviour {
 	// Received from UnitHealth
 	void OnDeath(Weapon w){
 		Destroy(healthBar);
+		Destroy(nameTextObj);
 	}
 }

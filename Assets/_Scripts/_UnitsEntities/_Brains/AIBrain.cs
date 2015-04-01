@@ -24,7 +24,7 @@ public abstract class AIBrain : MonoBehaviour {
 	// Things i think all of AI brains will want
 	public AIStrategy currentStrat = AIStrategy.none;
 	public Unit targetUnit;
-	private float someSpeed = 3f;
+	private float someSpeed = 150f;
 
 	// Inspector!
 	public bool brainOn = true;
