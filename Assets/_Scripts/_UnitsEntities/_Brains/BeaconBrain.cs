@@ -8,7 +8,7 @@ public class BeaconBrain : AIBrain {
 
 	CooldownField spawnCD;
 	float spawnTime = 3f;
-	float spawnRadius = 1f;
+	float spawnRadius = 20f;
 	int numToSpawn = 3;
 
 	public bool infiniteSpawn = false;
@@ -42,7 +42,7 @@ public class BeaconBrain : AIBrain {
 
 			if (spawnCD.Check()){
 				spawnCD.Fire();
-				SpawnNearby();
+				SpawnNearby(3);
 				numToSpawn--;
 			}
 
@@ -50,15 +50,26 @@ public class BeaconBrain : AIBrain {
 		}
 	}
 
-	protected void SpawnNearby(){
+
+	protected void SpawnNearby(int times = 1){
 		if (spawnPrefab == null){
 			Debug.LogError(unit.uniqName + "'s beaconbrain has no spawnprefab");
 			return;
 		}
 
-		GameObject unitParent = FightManager.instance.unitParent;
-		GameObject thing = Util.InitWithParent(spawnPrefab, unitParent); 
-		thing.transform.position = unit.GetEntity().transform.position;
+
+		for(int i = 0; i < times; i++){
+			GameObject unitParent = FightManager.instance.unitParent;
+			GameObject thing = Util.InitWithParent(spawnPrefab, unitParent); 
+
+			Vector3 newPos = unit.GetEntity().transform.position;
+			Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
+			newPos.x += randomCircle.x;
+			newPos.y += randomCircle.y;
+
+
+			thing.transform.position = newPos;
+		}
 	}
 
 }

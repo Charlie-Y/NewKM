@@ -9,13 +9,16 @@ public class WeaponEntity : MonoBehaviour {
 	public bool setup = false;
 	public bool isEnemy = false;
 
+	// Set sprites in inspector
+	public Sprite enemySprite;
+	public Sprite allySprite;
+
 	float range;
 	Vector3 direction;
 	Vector3 startPosition;
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
@@ -48,6 +51,9 @@ public class WeaponEntity : MonoBehaviour {
 		setup = true;
 		isEnemy = wep.owner.isEnemy;
 		range = wep.range;
+
+		GetComponent<SpriteRenderer>().sprite = isEnemy ? enemySprite : allySprite;
+		
 	}
 
 
@@ -97,8 +103,6 @@ public class WeaponEntity : MonoBehaviour {
 //			Debugger.Log("Weapon", "Hit: " + other.gameObject.transform.parent.name);
 //			Debugger.Log("Weapon", "Hit: " + other.gameObject.transform.parent.name);
 			other.gameObject.transform.parent.gameObject.SendMessage("TakeDamage", w, SendMessageOptions.DontRequireReceiver);
-
-
 			Destroy(gameObject);
 		}
 

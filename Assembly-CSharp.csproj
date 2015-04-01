@@ -57,6 +57,7 @@
      <Compile Include="Assets\_Scripts\_Managers\GridManager.cs" />
      <Compile Include="Assets\_Scripts\_Managers\InputMapper.cs" />
      <Compile Include="Assets\_Scripts\_Managers\UIManager.cs" />
+     <Compile Include="Assets\_Scripts\_Player\Shield.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\BasicAllyEntity.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\BasicAllyUnit.cs" />
      <Compile Include="Assets\_Scripts\_UnitsEntities\BasicBeaconEntity.cs" />

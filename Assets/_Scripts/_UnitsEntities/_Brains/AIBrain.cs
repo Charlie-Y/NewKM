@@ -91,7 +91,7 @@ public abstract class AIBrain : MonoBehaviour {
 
 	protected Unit FindNearestEnemy(){
 		List<Unit> units;
-//		Unit tempUnit;
+		Unit tempUnit = default(Unit);
 
 		if (unit.isEnemy){
 			units = FightManager.instance.alliedUnits;
@@ -99,8 +99,23 @@ public abstract class AIBrain : MonoBehaviour {
 			units = FightManager.instance.enemyUnits;
 		}
 
-		return Util.RandomFromList<Unit>(units);
+//		return Util.RandomFromList<Unit>(units);
 
+		float minDist = float.MaxValue;
+		Vector3 thisPos = unit.GetEntity().transform.position;
+
+		foreach(Unit u in units){
+//			if (u == null)
+//				continue;
+
+			float thisDist = (u.GetEntity().transform.position - thisPos).magnitude;
+			if ( thisDist < minDist){
+				minDist = thisDist;
+				tempUnit = u;
+			}
+		}
+
+		return tempUnit;
 	}
 
 	protected void MoveEntityTowardsEntity(Entity e1, Entity e2){

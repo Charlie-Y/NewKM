@@ -95,6 +95,30 @@ public class FightManager : MonoBehaviour {
 		return u;
 	}
 
+	/// <summary>
+	/// Adds the unit. Called by the unit UpdateFightManager 
+	/// </summary>
+	/// <param name="u">U.</param>
+	public void AddUnit(Unit u){
+		if (u.isEnemy){
+			enemyUnits.Add(u);
+		} else {
+			alliedUnits.Add(u);
+		}
+	}
+
+	/// <summary>
+	/// Removes the unit. Called by Unit NoHealth
+	/// </summary>
+	/// <param name="u">U.</param>
+	public void RemoveUnit(Unit u){
+		if (u.isEnemy){
+			enemyUnits.Remove(u);
+		} else {
+			alliedUnits.Remove(u);
+		}
+	}
+
 
 }
 

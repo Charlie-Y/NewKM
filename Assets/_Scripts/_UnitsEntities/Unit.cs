@@ -67,7 +67,7 @@ public abstract class Unit : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		UpdateFightManager();
+		AddToFightManager();
 	}
 	
 	// Update is called once per frame
@@ -75,12 +75,12 @@ public abstract class Unit : MonoBehaviour {
 	
 	}
 
-	protected virtual void UpdateFightManager(){
-		if (isEnemy){
-			FightManager.instance.enemyUnits.Add(this);
-		} else {
-			FightManager.instance.alliedUnits.Add(this);
-		}
+	protected virtual void AddToFightManager(){
+		FightManager.instance.AddUnit(this);
+	}
+
+	protected virtual void RemoveFromFightManager(){
+		FightManager.instance.RemoveUnit(this);
 	}
 
 	protected virtual void InitEntities(){
@@ -142,6 +142,8 @@ public abstract class Unit : MonoBehaviour {
 	/// </summary>
 	public virtual void NoHealth(Weapon w){
 		Debugger.Log ("Weapon", uniqName + " has died" );
+
+		RemoveFromFightManager();
 		Destroy(gameObject);
 	}
 

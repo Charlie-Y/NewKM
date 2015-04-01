@@ -11,7 +11,7 @@ public class BasicGun : Weapon {
 	//protected void Set(int dmg, float rge, float rm, float speed, float c, string n){
 	protected override void SetupFields ()
 	{
-		Set( 10 , 600f, 0.8f, 300f, .2f, this.GetType().ToString());
+		Set( 10 , 300f, 0.8f, 300f, .2f, this.GetType().ToString());
 	}
 
 }
