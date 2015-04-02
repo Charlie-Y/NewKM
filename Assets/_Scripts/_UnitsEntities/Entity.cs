@@ -37,6 +37,10 @@ public abstract class Entity : MonoBehaviour {
 
 	}
 
+	void Update(){
+//		transform.localPosition = Vector2.zero;
+	}
+
 	/// <summary>
 	/// Sets the localScale to make sure the size of the entity is right
 	/// </summary>

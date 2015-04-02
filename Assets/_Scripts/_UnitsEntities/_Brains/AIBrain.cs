@@ -120,12 +120,14 @@ public abstract class AIBrain : MonoBehaviour {
 
 	protected void MoveEntityTowardsEntity(Entity e1, Entity e2){
 		e1.transform.position = Vector2.MoveTowards(e1.transform.position, e2.transform.position, someSpeed * Time.deltaTime);
+		//		e1.unit.transform.position = Vector2.MoveTowards(e1.unit.transform.position, e2.unit.transform.position, someSpeed * Time.deltaTime);
 	}
 
 	protected void MoveEntityAwayFromEntity(Entity e1, Entity e2){
 //		Vector2 pos = -(e2.transform.position - e1.transform.position);
 
 		e1.transform.position = Vector2.MoveTowards(e1.transform.position, e2.transform.position, someSpeed * Time.deltaTime);
+//		e1.unit.transform.position = Vector2.MoveTowards(e1.unit.transform.position, e2.unit.transform.position, someSpeed * Time.deltaTime);
 	}
 
 

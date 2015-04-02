@@ -59,12 +59,12 @@ public abstract class Unit : MonoBehaviour {
 	List<Entity> entities = new List<Entity>();
 	List<Weapon> weapons = new List<Weapon>();
 
-	void Awake(){
+	protected virtual void Awake(){
 		InitEntities();
 		id = Unit.ids++;
 		gameObject.name += ": " + id.ToString();
 	}
-
+	
 	// Use this for initialization
 	public virtual void Start () {
 		AddToFightManager();
@@ -90,7 +90,9 @@ public abstract class Unit : MonoBehaviour {
 			//Add the entities to the tracking
 			foreach (Transform child in transform){
 				Entity cent = child.gameObject.GetComponent<Entity>();
-				AddEntity(cent);
+				if (cent != null){
+					AddEntity(cent);
+				}
 			}
 		}
 	}

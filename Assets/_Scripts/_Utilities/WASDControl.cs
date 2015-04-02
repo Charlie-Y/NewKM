@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WASDControl : MonoBehaviour {
 
-	public float speed = 1f;
+	public float speed = 300f;
 //	private Vector3 pos;
 
 	private Rigidbody2D rb; 
@@ -37,14 +37,19 @@ public class WASDControl : MonoBehaviour {
 //			input = true;
 //		}
 
-		x = speed * Input.GetAxis("Horizontal");
-		y = speed * Input.GetAxis("Vertical");
+		x = speed * Input.GetAxis("Horizontal") * Time.deltaTime;
+		y = speed * Input.GetAxis("Vertical") * Time.deltaTime;
 
 		if (y != 0f || x != 0f)
 			input = true;
+
+//		Vector2 newPos = transform.parent.position;
+//		newPos.x += x;
+//		newPos.y += y;
 		
 		if (input)
 //			rb.AddForce(new Vector2(x, y));
 			rb.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
+//			transform.parent.transform.position = newPos;
 	}
 }

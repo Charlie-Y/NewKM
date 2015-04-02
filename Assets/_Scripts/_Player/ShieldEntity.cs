@@ -6,7 +6,8 @@ using System.Collections;
 /// </summary>
 public class ShieldEntity : MonoBehaviour {
 
-	Shield shield;
+	[HideInInspector]
+	public Shield shield;
 	public GameObject toFollow; // set by Shield.cs
 	bool isSetup = false;
 
@@ -16,12 +17,18 @@ public class ShieldEntity : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	// For some reason this and the unit need to be refreshed. 
 	void Update () {
 		if (isSetup)
-			transform.position = toFollow.transform.position;
+			RefreshPosition();
+	}
+
+	public void RefreshPosition(){
+		transform.position = toFollow.transform.position;
 	}
 
 	public void Setup(Shield s){
+		shield = s;
 		toFollow = s.unit.GetEntity().gameObject;
 		isSetup = true;
 	}

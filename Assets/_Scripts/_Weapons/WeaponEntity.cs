@@ -66,6 +66,11 @@ public class WeaponEntity : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if other object is on same side or has no unit <c>false</c> otherwise.</returns>
 	bool SameSideAsOther(GameObject other){
+		if ( other.tag == "Shield"){
+			Shield s = other.GetComponent<ShieldEntity>().shield;
+			return ((isEnemy && s.unit.isEnemy) || (!isEnemy && !s.unit.isEnemy)) ;
+		}
+
 		Entity ent = other.GetComponent<Entity>();
 		if (ent == null){
 			Debugger.Log ("Weapon", other.name + " entity is null");

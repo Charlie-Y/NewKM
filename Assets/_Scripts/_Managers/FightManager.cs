@@ -40,6 +40,11 @@ public class FightManager : MonoBehaviour {
 			instance = this;
 		else if (instance != this)
 			Destroy(gameObject);    
+
+		unitParent = new GameObject();
+		unitParent.name = "Units";
+		weaponEntityParent = new GameObject();
+		weaponEntityParent.name = "WeaponEntities";
 	}
 
 	// Use this for initialization
@@ -52,12 +57,9 @@ public class FightManager : MonoBehaviour {
 	
 	}
 
-
-
-
 	public void Init(){
-		LoadGridData();
-		StartFight();
+//		LoadGridData();
+//		StartFight();
 	}
 
 	void LoadGridData(){
@@ -118,6 +120,10 @@ public class FightManager : MonoBehaviour {
 			alliedUnits.Remove(u);
 		}
 	}
+
+//	public void Foo(){
+//		Debug.Log("FOO");
+//	}
 
 
 }

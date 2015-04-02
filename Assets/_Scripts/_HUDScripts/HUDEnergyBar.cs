@@ -8,7 +8,8 @@ using System.Collections;
 /// </summary>
 public class HUDEnergyBar : MonoBehaviour {
 
-	PlayerUnit player;
+//	PlayerUnit player;
+	PlayerEnergy energy;
 
 	// Set all in inspector. Should be from prefab of course
 	public Text currentEnergyText;
@@ -24,19 +25,19 @@ public class HUDEnergyBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (player == null){
+		if (energy == null){
 //			Debugger.Log("HUD", "faul");
-			player = GameObject.FindWithTag("Player").GetComponent<PlayerUnit>();
+			energy = GameObject.FindWithTag("Player").GetComponent<PlayerEnergy>();
 			return;
 
 		}
 
-		currentEnergyText.text = player.currentEnergy.ToString();
-		maxEnergyText.text = player.maxEnergy.ToString();
+		currentEnergyText.text = energy.currentEnergy.ToString("F2");
+		maxEnergyText.text = energy.maxEnergy.ToString();
 
 
 //		Debugger.Log("HUD", player.GetEnergyPercentage());
-		energyFillImg.fillAmount = player.GetEnergyPercentage();
+		energyFillImg.fillAmount = energy.GetEnergyPercentage();
 
 	}
 }

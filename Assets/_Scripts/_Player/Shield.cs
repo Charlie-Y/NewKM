@@ -7,6 +7,7 @@ using System.Collections;
 /// 
 /// 
 /// 
+///  Assumes player for now
 /// 
 /// </summary>
 public class Shield : MonoBehaviour {
@@ -15,26 +16,52 @@ public class Shield : MonoBehaviour {
 	// should have a ShieldEntity Script attached
 	public GameObject shieldEntityPrefab;
 	[HideInInspector]
-	public Unit unit;
+	public PlayerUnit unit;
+	public PlayerEnergy energy;
 
 	// This is the shield obj which you turn on and off
 	GameObject entity;
+	ShieldEntity shieldEntity;
 	public bool shieldOn = false; // stupid overhead for now
 
+	int _activateCost = 5;
+	public int activateCost { get{return _activateCost;} set{}  }
+
+	float _costPerSecond = 20;
+	public float costPerSecond { get{return _costPerSecond;} set{} }
+	[HideInInspector]
+	public float stayOnInterval = .1f;
+
+
+	public float shieldHitCost = 3f;
+
+	CooldownField costPerSecondCD;
+
+
 	// Use this for initialization
-	void Start () {
-		unit = GetComponent<Unit>();
+	public virtual void Start () {
+		unit = GetComponent<PlayerUnit>();
+		energy = GetComponent<PlayerEnergy>();
+
 		entity = Util.InitWithParent(shieldEntityPrefab, gameObject);
 
-		entity.GetComponent<ShieldEntity>().Setup(this);
+		shieldEntity = entity.GetComponent<ShieldEntity>();
+		shieldEntity.Setup(this);
+
+		costPerSecondCD = new CooldownField(stayOnInterval, false);
 
 		ShieldOff();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public virtual void Update () {
+		if (shieldOn && costPerSecondCD.Check()){
+			shieldEntity.RefreshPosition();
+			ShieldStayOn();
+		}
+		// holding down mouse keys is annoying
 		if (Input.GetKeyDown(KeyCode.Space)){
-			ShieldOn();
+			TryShieldOn();
 		} 
 
 		if (Input.GetKeyUp(KeyCode.Space)){
@@ -42,28 +69,67 @@ public class Shield : MonoBehaviour {
 		} 
 	}
 
-	void ShieldOn(){
+	void TryShieldOn(){
+		if (shieldOn)
+			return;
+
+		if (energy.HasEnergy(activateCost)){
+			shieldEntity.RefreshPosition();
+			ShieldOn();
+		}
+	}
+
+	public virtual void ShieldOn(){
 		shieldOn = true;
 		entity.SetActive(shieldOn);
+
+		energy.UseEnergy(activateCost);
+
+		// Playerunit can catch this i guess. ai brain too
+		gameObject.SendMessage("ShieldOnMessage", this, SendMessageOptions.DontRequireReceiver);
+
 	}
 
-	void ShieldOff(){
+	public virtual void ShieldOff(){
 		shieldOn = false;
 		entity.SetActive(shieldOn);
+
+		// Playerunit can catch this i guess. ai brain too
+		gameObject.SendMessage("ShieldOffMessage", this, SendMessageOptions.DontRequireReceiver);
 	}
 
-//	public void TakeDamage(Weapon w){
-//		Debugger.Log("Shield", "TakeDamage");
-//	}
+	public virtual void ShieldStayOn(){
 
-	// Sent by WeaponEntity. maybe i could just send this to the unit...
-	// sigh this is roundabout
-//	public void ShieldHit(Weapon w){
-//		Debugger.Log("Shield", "ShieldHit");
-//		if (unit.isPlayer)
-//			unit.SendMessage("OnShieldHit", w);
-//	}
+		if (CheckShieldEnergy(costPerSecond * stayOnInterval)){
+			energy.UseEnergy(costPerSecond * stayOnInterval);
+			gameObject.SendMessage("ShieldStayOnMessage", this, SendMessageOptions.DontRequireReceiver);
+		}
+	}
 
+	/// <summary>
+	/// Checks the shield energy.
+	/// </summary>
+	bool CheckShieldEnergy(float cost){
+		if (!energy.HasEnergy( cost)){
+			ShieldOff();
+			return false;
+		}
+		return true;
+	}
+
+
+	/// <summary>
+	/// Sent by shield entity
+	/// 
+	/// 
+	/// just subtracct for now
+	/// </summary>
+	public virtual void ShieldHitMessage(Weapon w){
+
+
+	}
+
+	
 	void OnDeath(){
 		Destroy(entity);
 	}

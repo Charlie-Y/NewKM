@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour {
 	public static int GameRows = 4;
 
 	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-	private GridManager gridScript;                       //Store a reference to our BoardManager which will set up the level.
-	private FightManager fightScript;
+//	private GridManager gridScript;                       //Store a reference to our BoardManager which will set up the level.
+//	private FightManager fightScript;
 
 	private int level = 3;                                  //Current level number, expressed in game as "Day 1".
 
@@ -50,18 +50,23 @@ public class GameManager : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 		
 		//Get a component reference to the attached BoardManager script
-		gridScript = GetComponent<GridManager>();
-		fightScript = GetComponent<FightManager>();
-
+//		gridScript = GetComponent<GridManager>();
 		InitGame();
+
 	}
-	
+
+	void Start(){
+//		fightScript = GetComponent<FightManager>();
+//		fightScript = FightManag
+	}
+
+
 	//Initializes the game for each level.
 	void InitGame()
 	{
 		//Call the SetupScene function of the BoardManager script, pass it current level number.
 //		gridScript.InitGrid(level);
-		fightScript.Init();
+//		fightScript.Init();
 	}
 	
 	//Update is called every frame.
@@ -78,6 +83,13 @@ public class GameManager : MonoBehaviour {
 	void LeaveState(GameState state){
 		Debugger.Log ("GameState", "Leaving state: " + state.ToString());
 	}
+
+	public void LoadScene(int level){
+		Debugger.Log ("Level", level);
+		Debug.Log ("Level");
+		Application.LoadLevel(level);
+	}
+
 
 
 	
