@@ -53,7 +53,8 @@ public class UnitHUD : MonoBehaviour {
 
 		if (showName)
 			CreateNameUI();
-		
+
+
 	}
 
 
@@ -73,7 +74,10 @@ public class UnitHUD : MonoBehaviour {
 		nameText = nameTextObj.GetComponent<Text>();
 		nameText.text = unit.uniqName;
 
+//			nameTextObj.transform.rotation = Quaternion.identity;
+
 		UpdateNameUI();
+		nameTextObj.GetComponent<RectTransform>().localRotation = Quaternion.identity;
 	}
 
 	void UpdateNameUI(){
@@ -95,15 +99,18 @@ public class UnitHUD : MonoBehaviour {
 		// This is ridiculous
 		healthBarFillImg = healthBar.transform.GetChild(0).gameObject.GetComponent<Image>();
 		healthBarFillImg.fillAmount = HealthPercentage();
-		
+
+//		healthBar.transform.rotation = Quaternion.identity;
+		healthBar.GetComponent<RectTransform>().localRotation = Quaternion.identity;
+
 		UpdateHealthUI();
 	}
 
 
 	Vector3 HUDPos(float offset = 0){
-		float offsetY = rend.bounds.size.y + barOffset + offset;
+		float offsetY = rend.bounds.size.z + barOffset + offset;
 		Vector3 newPos =  toFollow.transform.position;
-		newPos.y += offsetY;
+		newPos.z += offsetY;
 
 		return newPos;
 	}

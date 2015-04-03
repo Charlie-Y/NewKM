@@ -6,7 +6,9 @@ public static class Util {
 
 
 	public static GameObject InitWithParent(GameObject prefab, GameObject parent ){
-		GameObject instance = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
+
+
+		GameObject instance = Object.Instantiate(prefab, Vector3.zero, prefab.transform.rotation) as GameObject;
 		if (parent != null)
 			instance.transform.SetParent(parent.transform);
 		return instance;
