@@ -6,17 +6,17 @@ public class WASDControl : MonoBehaviour {
 	public float speed = 300f;
 //	private Vector3 pos;
 
-	private Rigidbody2D rb; 
+	private Rigidbody rb; 
 
 	void Start() {
 //		pos = transform.position;
-		rb = GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody>();
 
 	}
 	
 	void Update() {
 		float x = 0;
-		float y = 0;
+		float z = 0;
 		bool input = false;
 
 //		if (Input.A(KeyCode.W)){
@@ -38,18 +38,19 @@ public class WASDControl : MonoBehaviour {
 //		}
 
 		x = speed * Input.GetAxis("Horizontal") * Time.deltaTime;
-		y = speed * Input.GetAxis("Vertical") * Time.deltaTime;
+		z = speed * Input.GetAxis("Vertical") * Time.deltaTime;
 
-		if (y != 0f || x != 0f)
+		if (z != 0f || x != 0f)
 			input = true;
 
-//		Vector2 newPos = transform.parent.position;
-//		newPos.x += x;
-//		newPos.y += y;
+		Vector3 newPos = transform.position;
+		newPos.x += x;
+		newPos.z += z;
+
 		
 		if (input)
 //			rb.AddForce(new Vector2(x, y));
-			rb.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
-//			transform.parent.transform.position = newPos;
+//			rb.AddForce(new Vector3(x, 0, z), ForceMode.Impulse);
+			transform.position = newPos;
 	}
 }
