@@ -81,7 +81,8 @@ public class WeaponEntity : MonoBehaviour {
 	}
 
 //	void OnCollisionEnter2D(Collision2D other){
-	void OnTriggerEnter2D(Collider2D other){
+//	void OnTriggerEnter2D(Collider2D other){
+	void OnTriggerEnter(Collider other){
 //		Debugger.Log("Weapon", "Hit: " + other.gameObject.name);
 //		Debugger.Log("Weapon", "Hit: " + other.tag);
 		if (SameSideAsOther(other.gameObject))

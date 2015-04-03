@@ -81,10 +81,10 @@ public abstract class Weapon : MonoBehaviour {
 	/// <param name="e">Your target that the weapon projectile will see.</param>
 	public virtual void FireAtEntity(Entity e, bool useCooldown ){
 		if (!useCooldown || fireCD.Check()){
-//			GameObject instance = Instantiate(projectilePrefab, owner.GetEntity().transform.position, Quaternion.identity) as GameObject;
-//			instance.transform.SetParent(FightManager.instance.weaponEntityParent.transform);
+			GameObject instance = Instantiate(projectilePrefab, owner.GetEntity().transform.position, projectilePrefab.transform.rotation) as GameObject;
+			instance.transform.SetParent(FightManager.instance.weaponEntityParent.transform);
 
-			GameObject instance = Util.InitWithParent(projectilePrefab, FightManager.instance.weaponEntityParent);
+//			GameObject instance = Util.InitWithParent(projectilePrefab, FightManager.instance.weaponEntityParent);
 
 			WeaponEntity went = instance.GetComponent<WeaponEntity>();
 

@@ -65,7 +65,7 @@ public class BeaconBrain : AIBrain {
 			Vector3 newPos = unit.GetEntity().transform.position;
 			Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
 			newPos.x += randomCircle.x;
-			newPos.y += randomCircle.y;
+			newPos.z += randomCircle.y;
 
 
 			thing.transform.position = newPos;
